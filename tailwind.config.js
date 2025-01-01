@@ -7,7 +7,13 @@ export default {
   theme: {
     extend: {
       colors: {
+        green100: '#DCFCE7',
+        green200: '#BBF7D0',
+        green300: '#86EFAC',
+        green400: '#4ADE80',
         green500: '#22C55E',
+        green600: '#16A34A',
+        green700: '#15803D',
         green800: '#166534',
         green900: '#14532D',
         gray200: '#e5e7eb',
