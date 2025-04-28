@@ -28,8 +28,8 @@ type User = {
 const userData: User[] = [
   {
     id: 1,
-    name: "John Doe",
-    email: "john@example.com",
+    name: "Ehsan",
+    email: "ehsan@example.com",
     image: "/Mentor2.JPG",
     location: "New York",
     type: "Starter",
@@ -37,8 +37,8 @@ const userData: User[] = [
   },
   {
     id: 2,
-    name: "Jane Smith",
-    email: "jane@example.com",
+    name: "Awais",
+    email: "awais@example.com",
     image: "/Mentor2.JPG",
     location: "Los Angeles",
     type: "Standard",
@@ -46,8 +46,8 @@ const userData: User[] = [
   },
   {
     id: 3,
-    name: "Alice Brown",
-    email: "alice@example.com",
+    name: "Ali Brown",
+    email: "ali@example.com",
     image: "/Mentor2.JPG",
     location: "Chicago",
     type: "Instructor",
@@ -55,8 +55,8 @@ const userData: User[] = [
   },
   {
     id: 4,
-    name: "Alice Brown",
-    email: "alice@example.com",
+    name: "Inzi",
+    email: "inzi@example.com",
     image: "/Mentor2.JPG",
     location: "Chicago",
     type: "Instructor",
@@ -64,8 +64,8 @@ const userData: User[] = [
   },
   {
     id: 5,
-    name: "Alice Brown",
-    email: "alice@example.com",
+    name: "Raheel",
+    email: "raheel@example.com",
     image: "/Mentor2.JPG",
     location: "Chicago",
     type: "Instructor",
@@ -109,8 +109,8 @@ const userData: User[] = [
   },
   {
     id: 10,
-    name: "Alice Brown",
-    email: "alice@example.com",
+    name: "Bilal",
+    email: "bilal@example.com",
     image: "/Mentor2.JPG",
     location: "Chicago",
     type: "Instructor",
@@ -127,8 +127,8 @@ const userData: User[] = [
   },
   {
     id: 12,
-    name: "Alice Brown",
-    email: "alice@example.com",
+    name: "Awais Brown",
+    email: "awis@example.com",
     image: "/Mentor2.JPG",
     location: "Chicago",
     type: "Instructor",
@@ -245,6 +245,24 @@ export default function Users() {
   const [currentPage, setCurrentPage] = useState(1);
   const [isAddUserModalOpen, setisAddUserModalOpen] = useState(false);
   const usersPerPage = 10;
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
+  
+  // Filter data based on search query (name or email)
+  const filteredData = userData.filter((user) => {
+    const searchLower = searchQuery.toLowerCase();
+    return (
+      user.name.toLowerCase().includes(searchLower) ||
+      user.email.toLowerCase().includes(searchLower)
+    );
+  });
+
+  // Reset to first page when search changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery]);
+  
   const indexOfLastProgram = currentPage * usersPerPage;
   const indexOfFirstProgram = indexOfLastProgram - usersPerPage;
   
@@ -253,13 +271,7 @@ export default function Users() {
   };
   // Get the current programs to display based on pagination
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
-  };
-
-  const filteredData = userData.filter((user) =>
-    user.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  
   const currentusers = filteredData.slice(
     indexOfFirstProgram,
     indexOfLastProgram
@@ -361,7 +373,7 @@ export default function Users() {
           </tbody>
         </table>
       </div>
-      <div className="flex justify-center mt-12">
+      <div className="flex justify-end mt-12">
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
